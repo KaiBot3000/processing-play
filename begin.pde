@@ -81,15 +81,48 @@
 
 // ### program 4 - bezier curves
 
-void setup() {
-  size(400, 400);
-}
-void mousePressed() {
-  background(128);
-  stroke(0);
-  noFill();
-  beginShape();
-  vertex(50, 75); // call out first point
-  bezierVertex(mouseX, mouseY, 300, 50, 300, 300);
-  endShape();
-}
+// void setup() {
+//   size(400, 400);
+// }
+// void mousePressed() {
+//   background(128);
+//   stroke(0);
+//   noFill();
+//   beginShape();
+//   vertex(50, 75); // call out first point
+//   bezierVertex(mouseX, mouseY, 300, 50, 300, 300);
+//   endShape();
+// }
+
+
+// ### 5 - bouncing ball
+// float x = 100;
+// float y = 50;
+// float xspeed = 0.3;
+// float yspeed = 1;
+
+// void setup() {
+//   size(100, 100);
+//   smooth();
+//   background(128);
+// }
+
+// void draw() {
+//   noStroke();
+//   fill(255, 0);
+//   rect(0,0,width,height);
+
+//   x = x + xspeed;
+//   y = y + yspeed;
+
+//   if ((x>width) || (x<0)) {
+//     xspeed = xspeed * -1;
+//   }
+//   if ((y>width) || (y<0)) {
+//     yspeed = yspeed * -1;
+//   }
+
+//   stroke(0);
+//   fill(175);
+//   ellipse(x,y,16,16);
+// }
