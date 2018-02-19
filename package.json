@@ -1,0 +1,15 @@
+{
+  "name": "processing-play",
+  "version": "1.0.0",
+  "description": "playing with processing.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kaibot3000",
+  "license": "ISC",
+  "dependencies": {
+    "http-server": "^0.11.1",
+    "processing": "^0.2.0"
+  }
+}
