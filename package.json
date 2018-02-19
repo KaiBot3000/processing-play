@@ -4,6 +4,7 @@
   "description": "playing with processing.js",
   "main": "index.js",
   "scripts": {
+    "start": "open http://127.0.0.1:8080/demo.html && http-server -c-1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "kaibot3000",
