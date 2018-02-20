@@ -1,26 +1,22 @@
-// base
-//multiplier
-
-//ex base 10, multiple 2 
-//2 = cardioid
-// cool to do floats
-//3 = nephroid
-
-// times table modulo 200
-
-// petals = n-1
-
 ArrayList<Nail> nails = new ArrayList<Nail>();
 
-int radius = 175;
+int radius = 350;
 int numPoints = 200;
 int pointRadius = 3;
 float multiplier = 2;
 
 void setup() {
-    size(400, 400);
+    size(800, 800);
     background(240);
+    fill(0);
     drawCircle(radius, numPoints);
+    displayMultiples();
+}
+
+void draw() {
+    // background();
+    // drawCircle(radius, numPoints);
+    // displayMultiples();
 }
 
 void drawCircle(radius, points) {
@@ -31,15 +27,12 @@ void drawCircle(radius, points) {
     for (Nail nail : nails) {
         nail.display();
     }
-    displayMultiples();
 }
 
 void displayMultiples() {
-    stroke(0);
     for (int i=0; i<nails.size(); i++) {
         Nail start = nails.get(i);
         Nail end = nails.get((multiplier * i) % numPoints);
-        println((multiplier * i) % numPoints);
         line(start.x, start.y, end.x, end.y);
     }
 }
@@ -57,6 +50,15 @@ class Nail {
 
     void display() {
         stroke(color);
+        fill(color);
         ellipse(x, y, radius, radius);
     }
 }
+
+/*
+ * Slider
+ */
+
+void updateVariables(float sliderMultiplier) {
+    multiplier = sliderMultiplier;
+} 
