@@ -9,9 +9,14 @@ void setup() {
 
 void draw() {
     background();
-    for (Ripple ripple : ripples) {
-        ripple.update();
-        ripple.display();
+    for (int i=0; i<ripples.size(); i++) {
+        Ripple ripple = ripples.get(i);
+        if (ripple.hide) {
+            ripples.remove(i);
+        } else {
+            ripple.update();
+            ripple.display();
+        }
     }
 }
 
@@ -28,16 +33,16 @@ class Ripple {
     Ripple(float xTemp, float yTemp) {
         x = xTemp;
         y = yTemp;
-        radius = 5;
-        color = BASE_COLOR-100; // 140
+        radius = 1;
+        color = BASE_COLOR-100;
     }
 
     void update() {
-        if (radius >= 60) {
+        if (color >= BASE_COLOR) {
             hide = true;
         }
         radius += 3;
-        color -= 1;
+        color += 1;
     }
 
     void display() {
