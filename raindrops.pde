@@ -8,7 +8,7 @@ void setup() {
 }
 
 void draw() {
-    background();
+    background(BASE_COLOR);
     for (int i=0; i<ripples.size(); i++) {
         Ripple ripple = ripples.get(i);
         if (ripple.hide) {
@@ -30,9 +30,9 @@ class Ripple {
     boolean hide = false;
 
     // Constructor
-    Ripple(float xTemp, float yTemp) {
-        x = xTemp;
-        y = yTemp;
+    Ripple(float x, float y) {
+        this.x = x;
+        this.y = y;
         radius = 1;
         color = BASE_COLOR-100;
     }
