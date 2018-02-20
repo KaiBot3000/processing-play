@@ -10,6 +10,8 @@
 
 // petals = n-1
 
+ArrayList<Nail> nails = new ArrayList<Nail>();
+
 int radius = 175;
 int numPoints = 200;
 int pointRadius = 3;
@@ -21,11 +23,33 @@ void setup() {
 }
 
 void drawCircle(radius, points) {
-    stroke(0);
-    fill(0);
     float angle = TWO_PI/(float)points;
     for ( int i=0; i<points; i++) {
-        ellipse(radius*sin(angle*i) + (width/2), radius*cos(angle*i) + (height/2), pointRadius, pointRadius);
+        nails.add(new Nail(radius*sin(angle*i) + (width/2), radius*cos(angle*i) + (height/2)));
+    }
+    for (Nail nail : nails) {
+        nail.display();
     }
 }
+
+class Nail {
+    float x, y;
+    int radius, color;
+
+    Nail(float xTemp, float yTemp) {
+        x = xTemp;
+        y = yTemp;
+        radius = 3;
+        color = 0;
+    }
+
+    void display() {
+        stroke(color);
+        ellipse(x, y, radius, radius);
+    }
+}
+
+
+
+
 
