@@ -1,9 +1,9 @@
 ArrayList<Nail> nails = new ArrayList<Nail>();
 
 int radius = 350;
-int numPoints = 10;
-int pointRadius = 3;
-float multiplier = 99;
+int numPoints = 200;
+int pointRadius = 2;
+float multiplier = 2;
 
 void setup() {
     size(800, 800);
@@ -20,6 +20,7 @@ void draw() {
 }
 
 void displayCircle(radius, points) {
+    nails.clear();
     float angle = TWO_PI/(float)points;
     for (int i=0; i<points; i++) {
         nails.add(new Nail(radius*sin(angle*i) + (width/2), radius*cos(angle*i) + (height/2)));
