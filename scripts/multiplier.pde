@@ -34,9 +34,6 @@ void displayMultiples() {
     for (int i=0; i<nails.size(); i++) {
         Nail start = nails.get(i);
         Nail end = nails.get((multiplier * i) % numPoints);
-        // possibly lines getting drawn twice because of overlap- there are actually two lines with that math
-        // could add to dict / dedupe then draw
-        // but why would that only be the case when ran in draw() but not setup()?
         line(start.x, start.y, end.x, end.y);
     }
 }
