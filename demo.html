@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-  <title><!-- Your title goes here --></title>
+  <title></title>
   <meta charset='utf-8'>
 
   <script src='processing.min.js'></script> 
   <link href='https://api.mapbox.com/mapbox-assembly/v0.20.0/assembly.min.css' rel='stylesheet'>
 
-  <script type='text/javascript'>
+<!--   <script type='text/javascript'>
     function updateMultiplier(multiplier) {
       sketch = Processing.getInstanceById('sketchCanvas');
       sketch.updateMultiplier(multiplier);
     }
+  </script> -->
 
-  </script>
 </head>
 <body>
-  <canvas id='sketchCanvas' data-processing-sources='multiplier.pde'></canvas>
+  <canvas id='sketchCanvas' data-processing-sources='scripts/pyramids.pde'></canvas>
   <!-- slider for points -->
-  <div class='range range--black w300'><input type='range' min='2' max='10' onInput='updateMultiplier(this.value)'></div>
+<!--   <div class='range range--black w300'><input type='range' min='2' max='10' onInput='updateMultiplier(this.value)'></div> -->
 </body>
 
