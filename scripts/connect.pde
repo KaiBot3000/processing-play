@@ -16,7 +16,9 @@ click add nodes
 */
 
 ArrayList<Node> nodes = new ArrayList<Node>();
-int RADIUS = 5;
+int HEIGHT = 400;
+int WIDTH = 400;
+int RADIUS = 25;
 
 void setup() {
     size(400, 400);
@@ -30,15 +32,28 @@ void draw() {
 }
 
 void mousePressed() {
+    // maybe add some stick to centerline if clicked within a certain threshold?
     nodes.add(new Node(mouseX, mouseY));
+    nodes.add(new Node((WIDTH - mouseX), mouseY));
 }
 
 void drawConnections() {
-    // figure out which nodes to connect
-    // for now connect in a chain
-    for (int i=0; i<nodes.size()-1; i++) {
+    // connect first nodes
+    if (nodes.size() > 1) {
+        Node first = nodes.get(0);
+        Node second = nodes.get(1);
+        line(first.x, first.y, second.x, second.y);
+    }
+    // conect last nodes
+    if (nodes.size() > 3) {
+        Node last = nodes.get(nodes.size()-1);
+        Node penultimate = nodes.get(nodes.size()-2);
+        line(last.x, last.y, penultimate.x, penultimate.y);
+    }
+    // connect middle nodes, mirrored
+    for (int i=0; i<nodes.size()-2; i++) {
         Node start = nodes.get(i);
-        Node end = nodes.get(i+1);
+        Node end = nodes.get(i+2);
         line(start.x, start.y, end.x, end.y);
     }
 }
@@ -58,12 +73,11 @@ class Node {
         this.x = x;
         this.y = y;
         radius = RADIUS;
-        color = 250;
     }
 
     void display() {
-        stroke(color);
-        fill(color);
+        stroke(0);
+        fill(239, 125, 26);
         ellipse(x, y, radius, radius);
     }
 }
