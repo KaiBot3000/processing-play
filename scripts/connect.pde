@@ -18,7 +18,9 @@ click add nodes
 ArrayList<Node> nodes = new ArrayList<Node>();
 int HEIGHT = 400;
 int WIDTH = 400;
+int CENTER = WIDTH / 2;
 int RADIUS = 25;
+int STICKY_THRESHOLD = 10;
 
 void setup() {
     size(400, 400);
@@ -32,9 +34,13 @@ void draw() {
 }
 
 void mousePressed() {
-    // maybe add some stick to centerline if clicked within a certain threshold?
-    nodes.add(new Node(mouseX, mouseY));
-    nodes.add(new Node((WIDTH - mouseX), mouseY));
+    if (mouseX > (CENTER - STICKY_THRESHOLD) && mouseX < (CENTER + STICKY_THRESHOLD)) {
+        nodes.add(new Node(CENTER, mouseY));
+        nodes.add(new Node(CENTER, mouseY));
+    } else {
+        nodes.add(new Node(mouseX, mouseY));
+        nodes.add(new Node((WIDTH - mouseX), mouseY));
+    }
 }
 
 void drawConnections() {
