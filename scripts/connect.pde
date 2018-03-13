@@ -48,7 +48,7 @@ void mousePressed() {
 void drawConnections() {
     // gross way to get boxes
     // strokeWeight(RADIUS);
-
+    // noStroke();
     fill(220);
     // connect first nodes
     if (nodes.size() > 1) {
@@ -77,7 +77,7 @@ void drawConnections() {
 // calculateBox({x: 1, y: 7},{x: 7, y: 7});
 void calculateBox(node1, node2) {
     // ArrayList<Point> points = new ArrayList<Point>();
-    int[][] points = new int[4][2]; // create a list of 4 elements, each having two elements
+    float [][] points = new float [4][2]; // create a list of 4 elements, each having two elements
 
     if (node1.y === node2.y) { // is a flat box, 0 slope
         points[0] = [node2.x, node2.y+RADIUS];
@@ -91,22 +91,21 @@ void calculateBox(node1, node2) {
         points[3] = [node2.x+RADIUS, node2.y];
 
     } else {
-        // find slope
-        float m = ((node1.y - node2.y) / (node1.x - node2.x)) * (-1);
+        float m = (-1) / ((node1.y - node2.y) / (node1.x - node2.x));
 
-        float dx = (1 / sqrt(1 + (m * m)));
+        float dx = sqrt((RADIUS * RADIUS) / (1.0 + (m*m)) / 2.0);
         float dy = m * dx;
+        console.log(dx, dy);
 
-        points[0] = [node1.x+dx, node1.y-dy];
-        points[1] = [node2.x+dx, node2.y+dy];
-        points[2] = [node1.x-dx, node1.y-dy];
+        points[0] = [node1.x-dx, node1.y-dy];
+        points[1] = [node1.x+dx, node1.y+dy];
+        points[2] = [node2.x+dx, node2.y+dy];
         points[3] = [node2.x-dx, node2.y-dy];
     }
     return points;
 }
 
 void drawNodes() {
-    // tidier loop for when you don't need to remove things or handle multiple nodes at a time
     for (Node node: nodes) {
         node.display();
     }
