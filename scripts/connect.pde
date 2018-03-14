@@ -40,13 +40,8 @@ void setup() {
     strokeWeight(2);
 }
 
-void onClick() {
-    background();
-    drawConnections();
-    drawNodes();
-}
-
 void mousePressed() {
+    // add new points to array
     if (mouseX > (CENTER - DIAMETER) && mouseX < (CENTER + DIAMETER)) {
         nodes.add(new Node(CENTER, mouseY));
         nodes.add(new Node(CENTER, mouseY));
@@ -54,7 +49,11 @@ void mousePressed() {
         nodes.add(new Node(mouseX, mouseY));
         nodes.add(new Node((WIDTH - mouseX), mouseY));
     }
-    onClick();
+
+    // draw results
+    background();
+    drawConnections();
+    drawNodes();
 }
 
 void drawConnections() {
