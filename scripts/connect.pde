@@ -6,12 +6,23 @@ http://www.erictimothycarlson.com/
 */
 
 ArrayList<Node> nodes = new ArrayList<Node>();
+ArrayList<Box> boxes = new ArrayList<Box>();
+
+// List<Nodes> nodes = new ArrayList<>();
+// List<Nodes> reflections = new ArrayList();
+
+// for (i = 0; i < concatted.lenth; i++) {
+//     next = concatted[(i + 1) % concatted.length]
+//     drawBox(node, next)
+// }
+// for (Node node: in concat(nodes, reflections)) {
+//     drawNode()
+// }
 
 // canvas
 int HEIGHT = 400;
 int WIDTH = 400;
 int CENTER = WIDTH / 2;
-int STICKY_THRESHOLD = 10;
 
 // nodes
 float DIAMETER = 25;
@@ -54,47 +65,28 @@ void drawConnections() {
         Node first = nodes.get(0);
         Node second = nodes.get(1);
         int[][] points = calculateBox(first, second);
-        quad(points[0][0], points[0][1], points[1][0], points[1][1], points[2][0], points[2][1], points[3][0], points[3][1]);
+        boxes.add(new Box(points));
     }
     // connect last nodes
     if (nodes.size() > 3) {
         Node last = nodes.get(nodes.size()-1);
         Node penultimate = nodes.get(nodes.size()-2);
         int[][] points = calculateBox(last, penultimate);
-        quad(points[0][0], points[0][1], points[1][0], points[1][1], points[2][0], points[2][1], points[3][0], points[3][1]);
+        boxes.add(new Box(points));
     }
     // connect middle nodes, mirrored
     for (int i=0; i<nodes.size()-2; i++) {
         Node start = nodes.get(i);
         Node end = nodes.get(i+2);
         int[][] points = calculateBox(start, end);
-        quad(points[0][0], points[0][1], points[1][0], points[1][1], points[2][0], points[2][1], points[3][0], points[3][1]);
+        boxes.add(new Box(points));
     }
 
-    // outline connections
-    stroke(STROKE_COLOR);
-    if (nodes.size() > 1) {
-        Node first = nodes.get(0);
-        Node second = nodes.get(1);
-        int[][] points = calculateBox(first, second);
-        line(points[0][0], points[0][1], points[1][0], points[1][1]);
-        line(points[2][0], points[2][1], points[3][0], points[3][1]);
+    for (Box box: boxes) {
+        box.displayQuad();
     }
-    // connect last nodes
-    if (nodes.size() > 3) {
-        Node last = nodes.get(nodes.size()-1);
-        Node penultimate = nodes.get(nodes.size()-2);
-        int[][] points = calculateBox(last, penultimate);
-        line(points[0][0], points[0][1], points[1][0], points[1][1]);
-        line(points[2][0], points[2][1], points[3][0], points[3][1]);
-    }
-    // connect middle nodes, mirrored
-    for (int i=0; i<nodes.size()-2; i++) {
-        Node start = nodes.get(i);
-        Node end = nodes.get(i+2);
-        int[][] points = calculateBox(start, end);
-        line(points[0][0], points[0][1], points[1][0], points[1][1]);
-        line(points[2][0], points[2][1], points[3][0], points[3][1]);
+    for (Box box: boxes) {
+        box.displayLines();
     }
 }
 
@@ -143,4 +135,24 @@ class Node {
         fill(NODE_COLOR);
         ellipse(x, y, DIAMETER, DIAMETER);
     }
+}
+
+class Box {
+    float [][] points = new float [4][2];
+
+    Box(points) {
+        this.points = points;
+    }
+
+    void displayQuad() {
+        noStroke();
+        fill(BOX_COLOR);
+        quad(points[0][0], points[0][1], points[1][0], points[1][1], points[2][0], points[2][1], points[3][0], points[3][1]);
+    };
+
+    void displayLines() {
+        stroke(STROKE_COLOR);
+        line(points[0][0], points[0][1], points[1][0], points[1][1]);
+        line(points[2][0], points[2][1], points[3][0], points[3][1]);
+    };
 }
