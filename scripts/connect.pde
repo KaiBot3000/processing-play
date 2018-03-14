@@ -92,10 +92,8 @@ void calculateBox(node1, node2) {
 
     } else {
         float m = (-1) / ((node1.y - node2.y) / (node1.x - node2.x));
-
-        float dx = sqrt((RADIUS * RADIUS) / (1.0 + (m*m)) / 2.0);
+        float dx = RADIUS / sqrt(1 + (m * m));
         float dy = m * dx;
-        console.log(dx, dy);
 
         points[0] = [node1.x-dx, node1.y-dy];
         points[1] = [node1.x+dx, node1.y+dy];
@@ -132,7 +130,8 @@ class Node {
     void display() {
         strokeWeight(1);
         stroke(0);
-        fill(239, 125, 26);
+        // fill(239, 125, 26);
+        noFill();
         ellipse(x, y, diameter, diameter);
     }
 }
