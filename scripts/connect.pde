@@ -41,7 +41,8 @@ void mousePressed() {
         reflections.add(new Node((WIDTH - mouseX), mouseY));
     }
 
-    // generate combined list for calculating connetions
+    // generate combined list for calculating connections
+    boxes.clear();
     nodes.clear();
     nodes.addAll(clicks);
     nodes.addAll(reflections);
