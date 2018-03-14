@@ -1,18 +1,8 @@
 /*
-nodes
-add new node on click
-transparent connecting boxes to nodes
-circles over nodes drawn last
-
-grey background white boxes orange circles
-
-boxes drawn between two closest nodes of each node
-
-start:
-nodes
-boxes between first and last node
-click add nodes
-
+Inspired by a shirt I saw at the Recurse center,
+which was album art done for Bon Iver by 
+Brooklyn-based artist Eric Timothy Carlson:
+http://www.erictimothycarlson.com/
 */
 
 ArrayList<Node> nodes = new ArrayList<Node>();
@@ -24,17 +14,19 @@ int CENTER = WIDTH / 2;
 int STICKY_THRESHOLD = 10;
 
 // nodes
-int DIAMETER = 25;
-int RADIUS = DIAMETER / 2;
+float DIAMETER = 25;
+float RADIUS = DIAMETER / 2;
 
 // stylies
-int BACKGROUND_COLOR = 0;
-int BOX_COLOR = 225;
-int STROKE_COLOR = 0;
+color BACKGROUND_COLOR = 50;
+color BOX_COLOR = 225;
+color STROKE_COLOR = 0;
+color NODE_COLOR = color(255, 92, 5);
 
 void setup() {
     size(400, 400);
     background(BACKGROUND_COLOR);
+    strokeWeight(2);
 }
 
 void onClick() {
@@ -55,7 +47,6 @@ void mousePressed() {
 }
 
 void drawConnections() {
-
     // connect first nodes
     noStroke();
     fill(BOX_COLOR);
@@ -120,7 +111,6 @@ void calculateBox(node1, node2) {
         points[1] = [node2.x-RADIUS, node2.y];
         points[2] = [node2.x+RADIUS, node2.y];
         points[3] = [node1.x+RADIUS, node1.y];
-
     } else {
         float m = (-1) / ((node1.y - node2.y) / (node1.x - node2.x));
         float dx = RADIUS / sqrt(1 + (m * m));
@@ -140,27 +130,17 @@ void drawNodes() {
     }
 }
 
-class Point {
-    float x, y;
-    Point(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
-}
-
 class Node {
     float x, y;
-    int radius, color;
 
     Node(float x, float y) {
         this.x = x;
         this.y = y;
-        diameter = DIAMETER;
     }
 
     void display() {
-        stroke(0);
-        fill(255, 92, 5);
-        ellipse(x, y, diameter, diameter);
+        stroke(STROKE_COLOR);
+        fill(NODE_COLOR);
+        ellipse(x, y, DIAMETER, DIAMETER);
     }
 }
