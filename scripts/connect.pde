@@ -6,18 +6,9 @@ http://www.erictimothycarlson.com/
 */
 
 ArrayList<Node> nodes = new ArrayList<Node>();
+ArrayList<Node> clicks = new ArrayList<Node>();
+ArrayList<Node> reflections = new ArrayList<Node>();
 ArrayList<Box> boxes = new ArrayList<Box>();
-
-// List<Nodes> nodes = new ArrayList<>();
-// List<Nodes> reflections = new ArrayList();
-
-// for (i = 0; i < concatted.lenth; i++) {
-//     next = concatted[(i + 1) % concatted.length]
-//     drawBox(node, next)
-// }
-// for (Node node: in concat(nodes, reflections)) {
-//     drawNode()
-// }
 
 // canvas
 int HEIGHT = 400;
@@ -43,40 +34,32 @@ void setup() {
 void mousePressed() {
     // add new points to array
     if (mouseX > (CENTER - DIAMETER) && mouseX < (CENTER + DIAMETER)) {
-        nodes.add(new Node(CENTER, mouseY));
-        nodes.add(new Node(CENTER, mouseY));
+        clicks.add(new Node(CENTER, mouseY));
+        reflections.add(new Node(CENTER, mouseY));
     } else {
-        nodes.add(new Node(mouseX, mouseY));
-        nodes.add(new Node((WIDTH - mouseX), mouseY));
+        clicks.add(new Node(mouseX, mouseY));
+        reflections.add(new Node((WIDTH - mouseX), mouseY));
     }
+
+    // generate combined list for calculating connetions
+    nodes.clear();
+    nodes.addAll(clicks);
+    nodes.addAll(reflections);
 
     // draw results
     background();
-    drawConnections();
+    drawBoxes();
     drawNodes();
 }
 
-void drawConnections() {
-    // connect first nodes
-    noStroke();
-    fill(BOX_COLOR);
-    if (nodes.size() > 1) {
-        Node first = nodes.get(0);
-        Node second = nodes.get(1);
-        int[][] points = calculateBox(first, second);
-        boxes.add(new Box(points));
-    }
-    // connect last nodes
-    if (nodes.size() > 3) {
-        Node last = nodes.get(nodes.size()-1);
-        Node penultimate = nodes.get(nodes.size()-2);
-        int[][] points = calculateBox(last, penultimate);
-        boxes.add(new Box(points));
-    }
-    // connect middle nodes, mirrored
-    for (int i=0; i<nodes.size()-2; i++) {
+void drawBoxes() {
+    for (int i=0; i<nodes.size(); i++) {
         Node start = nodes.get(i);
-        Node end = nodes.get(i+2);
+        if (i === nodes.size() - 1) {
+            Node end = nodes.get(0);
+        } else {
+            Node end = nodes.get(i+1);
+        }
         int[][] points = calculateBox(start, end);
         boxes.add(new Box(points));
     }
